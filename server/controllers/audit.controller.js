@@ -1,5 +1,6 @@
 import classifyUseCaseAndLevel from '../services/classifier.service.js'
 import evaluateAudit from '../services/auditEngine.service.js'
+import generateSummary from '../services/summarizer.service.js'
 
 async function runAudit(req, res) {
   try {
@@ -14,18 +15,57 @@ async function runAudit(req, res) {
     }
 
     const toolNames = tools.map(t => t.toolId)
-    const classification = await classifyUseCaseAndLevel(description, toolNames)
 
+    // Component 1 — classify
+    let classification
+    try {
+      classification = await classifyUseCaseAndLevel(description, toolNames)
+      // If classification came back empty or invalid, use fallback
+      if (!classification.useCase || !classification.requiredLevel) {
+        throw new Error("Invalid classification")
+      }
+    } catch (e) {
+      console.error("Classification failed, using fallback:", e.message)
+      classification = {
+        useCase: "mixed",
+        requiredLevel: 2,
+        reasoning: "Could not classify — defaulting to mixed use case at level 2"
+      }
+    }
+
+    // Component 2 — evaluate
     const auditResult = evaluateAudit(tools, classification)
+
+    // Component 3 — summarize
+    let summaryData
+    try {
+      summaryData = await generateSummary(auditResult)
+    } catch (e) {
+      console.error("Summary failed, using fallback:", e.message)
+      const action = auditResult.totalMonthlySavings > 0
+        ? `You could save $${auditResult.totalMonthlySavings}/month by optimizing your plans.`
+        : "Your current AI tool spend looks well optimized."
+      summaryData = {
+        summary: `Based on your ${classification.useCase} workflow, we analyzed your AI stack. ${action}`,
+        aiGenerated: false
+      }
+    }
 
     return res.json({
       success: true,
-      data: auditResult
+      data: {
+        ...auditResult,
+        summary: summaryData.summary,
+        aiGenerated: summaryData.aiGenerated
+      }
     })
 
   } catch (error) {
     console.error('Audit error:', error)
-    return res.status(500).json({ error: 'Audit failed', message: error.message })
+    return res.status(500).json({ 
+      error: 'Audit failed', 
+      message: error.message 
+    })
   }
 }
 
