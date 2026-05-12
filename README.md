@@ -28,16 +28,20 @@ Built for the Credex Product Engineer Internship Assignment.
   - React
   - Vite
   - TailwindCSS
+  - Vercel (hosting)
 
 - Backend
   - Node.js
   - Express
+  - Render (hosting)
+> **Note**: Backend uses Render free tier and may take a few seconds to wake up on first request.
 
 - AI
   - Groq API
 
 - Email
   - Resend
+> **Note**: Resend is currently running in sandbox/testing mode, so email delivery is restricted to verified recipient addresses.
 
 - Testing
   - Vitest
@@ -83,7 +87,13 @@ Built for the Credex Product Engineer Internship Assignment.
 ![Email Report](./z_media/img8.png)
 
 ---
+## Live Demo
 
+Frontend: https://credex-project-pi.vercel.app/results
+
+Backend API: https://credex-project-nq0n.onrender.com/
+
+---
 # Local Setup
 
 ## Frontend
@@ -172,4 +182,6 @@ Priority was placed on:
 # Author
 
 Built by Jignesh Parmar for the Credex Product Engineer Internship Assignment.
+
+---
 

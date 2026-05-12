@@ -1,0 +1,4 @@
+# User Interviews
+
+1. I asked few of my friends and nobody knew like that you can buy credits second hand and cheaper and such problems even existed so I thought its like important to make more people aware about it as if they don't know that the issue exits then how will they even use our solution
+2. I asked my Brother who is also an Engineer and he said his company could really benefit from something like this if it could show some legit strong reasoning behind switching to alternative tools and I could also add features like if it would be even cheaper to hire Intern's or Junior Dev instead.
