@@ -93,7 +93,7 @@ export default function Home() {
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/audit', {
+      const response = await fetch('https://credex-project-nq0n.onrender.com/api/audit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

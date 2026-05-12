@@ -42,7 +42,7 @@ export default function Results() {
     setEmailLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/leads', {
+      const response = await fetch('https://credex-project-nq0n.onrender.com/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
