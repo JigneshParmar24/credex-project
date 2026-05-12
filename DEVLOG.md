@@ -59,3 +59,40 @@ costs the same or more.
 - Deploy on Render + Vercel
 - CI/CD with GitHub Actions
 - All documentation
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 9
+
+**What I did:**
+- Finished the entire frontend experience today. Reworked the UI heavily after the initial version started looking too “AI-generated SaaS template” — removed the neon/glassmorphism styling and redesigned the interface with a more restrained monochrome aesthetic inspired by Linear/Vercel style product interfaces.
+- Built the complete audit results page with:
+  - savings summary hero
+  - AI-generated audit explanation
+  - per-tool breakdown cards
+  - classification details
+  - lead capture flow
+- Implemented the email delivery pipeline using Resend. Built a fully custom HTML audit email template matching the web app branding and tested successful delivery end-to-end through Gmail.
+- Added automated tests using Vitest for the audit engine covering:
+  - seat waste detection
+  - downgrade detection
+  - optimal spend validation
+  - annual savings calculation
+  - wrong-tool recommendations
+- Set up CI/CD using GitHub Actions to automatically run tests on pushes to `main`.
+- Wrote and refined project documentation.
+- Captured final product screenshots for documentation and submission.
+- Finalized branding and renamed the product to “BurnRate”.
+
+**What I learned:**
+- UI polish matters much more than adding flashy effects. Removing gradients/glows and simplifying typography immediately made the product feel significantly more credible.
+- Writing deterministic audit logic was easier than expected; making AI-generated summaries feel believable and grounded was much harder.
+- GitHub Actions setup for a small Node project is surprisingly lightweight once the project structure is clean.
+
+**Blockers / what I'm stuck on:**
+- Did not finish Supabase persistence and shareable audit URLs before the submission deadline. The architecture was planned early, but prioritizing deployment readiness, polish, testing, and documentation turned out to be the more realistic tradeoff under time pressure.
+- University exams earlier in the week compressed the implementation window heavily, so several “nice-to-have” features had to be deferred.
+
+**Final Notes:**
+- Submission focuses on a polished working MVP with deterministic audit logic, testing, CI/CD, AI-assisted analysis, and a complete frontend/backend flow rather than partially-finished advanced infrastructure features.
+- If given additional time, the next immediate step would be persistent audit storage and public shareable audit pages.

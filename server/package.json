@@ -10,8 +10,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "vitest"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
@@ -23,5 +23,8 @@
     "groq-sdk": "^1.2.0",
     "openai": "^6.37.0",
     "resend": "^6.12.3"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.6"
   }
 }
