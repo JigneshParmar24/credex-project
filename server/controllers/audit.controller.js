@@ -4,12 +4,11 @@ import generateSummary from '../services/summarizer.service.js'
 
 async function runAudit(req, res) {
   try {
-    const { tools, description } = req.body
+    const { tools, description, teamSize } = req.body
 
     if (!tools || !Array.isArray(tools) || tools.length === 0) {
       return res.status(400).json({ error: 'tools array is required' })
     }
-
     if (!description || description.trim().length === 0) {
       return res.status(400).json({ error: 'description is required' })
     }
@@ -20,12 +19,10 @@ async function runAudit(req, res) {
     let classification
     try {
       classification = await classifyUseCaseAndLevel(description, toolNames)
-      // If classification came back empty or invalid, use fallback
       if (!classification.useCase || !classification.requiredLevel) {
         throw new Error("Invalid classification")
       }
     } catch (e) {
-      console.error("Classification failed, using fallback:", e.message)
       classification = {
         useCase: "mixed",
         requiredLevel: 2,
@@ -41,7 +38,6 @@ async function runAudit(req, res) {
     try {
       summaryData = await generateSummary(auditResult)
     } catch (e) {
-      console.error("Summary failed, using fallback:", e.message)
       const action = auditResult.totalMonthlySavings > 0
         ? `You could save $${auditResult.totalMonthlySavings}/month by optimizing your plans.`
         : "Your current AI tool spend looks well optimized."
@@ -56,17 +52,24 @@ async function runAudit(req, res) {
       data: {
         ...auditResult,
         summary: summaryData.summary,
-        aiGenerated: summaryData.aiGenerated
+        aiGenerated: summaryData.aiGenerated,
+        auditId: null // will work after deployment
       }
     })
 
   } catch (error) {
     console.error('Audit error:', error)
-    return res.status(500).json({ 
-      error: 'Audit failed', 
-      message: error.message 
+    return res.status(500).json({
+      error: 'Audit failed',
+      message: error.message
     })
   }
+}
+
+export async function getAuditById(req, res) {
+  return res.status(503).json({ 
+    error: 'Shareable URLs available after deployment' 
+  })
 }
 
 export default runAudit

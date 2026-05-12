@@ -1,8 +1,9 @@
 import { Router } from 'express'
-import runAudit from '../controllers/audit.controller.js'
+import runAudit, { getAuditById } from '../controllers/audit.controller.js'
 
 const router = Router()
 
 router.post('/', runAudit)
+router.get('/:id', getAuditById)
 
 export default router
