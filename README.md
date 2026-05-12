@@ -89,7 +89,7 @@ Built for the Credex Product Engineer Internship Assignment.
 ---
 ## Live Demo
 
-Frontend: https://credex-project-pi.vercel.app/results
+Frontend: https://credex-project-pi.vercel.app/
 
 Backend API: https://credex-project-nq0n.onrender.com/
 
@@ -184,4 +184,3 @@ Priority was placed on:
 Built by Jignesh Parmar for the Credex Product Engineer Internship Assignment.
 
 ---
-
